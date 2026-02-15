@@ -1,4 +1,5 @@
 "use strict";
+import { apiState, mealStore } from "./meal.store.js";
 const apiUrl = "https://www.themealdb.com/api/json/v1/1/";
 // DONE Search meal by name
 // DONE Lookup full meal details by id
@@ -23,14 +24,35 @@ export async function searchByMealName(mealName) {
     throw new Error("the Meal Name isn't given");
   }
   try {
+    // mealStore.setState({ isLoading: true });
+    mealStore.setState({ isLoading: true });
     const response = await fetch(`${apiUrl}search.php?s=${mealName}`);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.json();
-    return result;
+    // return result;
+    mealStore.setState({ isLoading: false, data: result });
   } catch (error) {
     console.error(error.message);
+    mealStore.setState({ isLoading: false, error: error.message });
+  }
+}
+
+//Random meal
+export async function GetRandomMeal() {
+  try {
+    mealStore.setState({ isLoading: true });
+    const response = await fetch(`${apiUrl}random.php`);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const result = await response.json();
+    // return result;
+    mealStore.setState({ isLoading: false, data: result });
+  } catch (error) {
+    console.error(error.message);
+    mealStore.setState({ isLoading: false, error: error.message });
   }
 }
 
@@ -40,28 +62,34 @@ export async function GetMealById(id) {
     throw new Error("the Meal Id isn't given");
   }
   try {
+    mealStore.setState({ isLoading: true });
     const response = await fetch(`${apiUrl}lookup.php?i=${id}`);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.json();
-    return result;
+    // return result;
+    mealStore.setState({ isLoading: false, data: result });
   } catch (error) {
     console.error(error.message);
+    mealStore.setState({ isLoading: false, error: error.message });
   }
 }
 
 // List all meal categories
 export async function GetAllCategories() {
   try {
+    mealStore.setState({ isLoading: true });
     const response = await fetch(`${apiUrl}categories.php`);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.json();
-    return result;
+    // return result;
+    mealStore.setState({ isLoading: false, data: result });
   } catch (error) {
     console.error(error.message);
+    mealStore.setState({ isLoading: false, error: error.message });
   }
 }
 
@@ -71,14 +99,17 @@ export async function GetMealsByIngredient(ingredient) {
     throw new Error("the Meal ingredient isn't given");
   }
   try {
+    mealStore.setState({ isLoading: true });
     const response = await fetch(`${apiUrl}$filter.php?i=${ingredient}`);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.json();
-    return result;
+    // return result;
+    mealStore.setState({ isLoading: false, data: result });
   } catch (error) {
     console.error(error.message);
+    mealStore.setState({ isLoading: false, error: error.message });
   }
 }
 
@@ -87,14 +118,17 @@ export async function GetMealsByCategory(category) {
     throw new Error("the Meal Category isn't given");
   }
   try {
+    mealStore.setState({ isLoading: true });
     const response = await fetch(`${apiUrl}filter.php?c=${category}`);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.json();
-    return result;
+    // return result;
+    mealStore.setState({ isLoading: false, data: result });
   } catch (error) {
     console.error(error.message);
+    mealStore.setState({ isLoading: false, error: error.message });
   }
 }
 
@@ -104,13 +138,16 @@ export async function GetMealsByArea(area) {
     throw new Error("the Meal area isn't given");
   }
   try {
+    mealStore.setState({ isLoading: true });
     const response = await fetch(`${apiUrl}filter.php?a=${area}`);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.json();
-    return result;
+    // return result;
+    mealStore.setState({ isLoading: false, data: result });
   } catch (error) {
     console.error(error.message);
+    mealStore.setState({ isLoading: false, error: error.message });
   }
 }
