@@ -1,4 +1,6 @@
 "use strict";
+import { RenderUI } from "./main.js";
+
 export const apiState = {
   data: null,
   isLoading: false,
@@ -7,18 +9,19 @@ export const apiState = {
 
 const createMealStore = (apiState) => {
   let state = apiState;
-  const listeners = new Set(); // set prevents duplicate
+  // const listeners = new Set(); // set prevents duplicate
 
   return {
     getState: () => state,
     setState: (newState) => {
       state = { ...state, ...newState };
-      listeners.forEach((listener) => listener(state));
+      RenderUI();
+      // listeners.forEach((listener) => listener(state));
     },
-    subscribe: (listener) => {
-      listeners.add(listener);
-      return () => listeners.delete(listener);
-    },
+    // subscribe: (listener) => {
+    //   listeners.add(listener);
+    //   return () => listeners.delete(listener);
+    // },
   };
 };
 
