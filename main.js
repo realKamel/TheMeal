@@ -2,11 +2,13 @@
 import { categoriesComponent } from "./components/categories.js";
 import { HomeComponent } from "./components/home.js";
 import { SearchComponent } from "./components/search.js";
+import { MealComponent } from "./components/meal.js";
 
 const routes = {
   home: HomeComponent,
   search: SearchComponent,
   categories: categoriesComponent,
+  meal: MealComponent,
 };
 const links = [
   {
@@ -23,6 +25,12 @@ const links = [
   },
 ];
 let selectedRoute = routes["home"];
+
+export function changeRoute(route) {
+  if (route in routes) {
+    selectedRoute = routes[route];
+  }
+}
 
 export function RenderUI() {
   const html = /*html*/ `
