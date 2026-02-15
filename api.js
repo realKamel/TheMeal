@@ -1,5 +1,5 @@
 "use strict";
-import { apiState, mealStore } from "./meal.store.js";
+import { mealStore } from "./meal.store.js";
 const apiUrl = "https://www.themealdb.com/api/json/v1/1/";
 // DONE Search meal by name
 // DONE Lookup full meal details by id
@@ -32,7 +32,7 @@ export async function searchByMealName(mealName) {
     }
     const result = await response.json();
     // return result;
-    mealStore.setState({ isLoading: false, data: result });
+    mealStore.setState({ isLoading: false, data: result.meals });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ isLoading: false, error: error.message });
@@ -49,7 +49,7 @@ export async function GetRandomMeal() {
     }
     const result = await response.json();
     // return result;
-    mealStore.setState({ isLoading: false, data: result });
+    mealStore.setState({ isLoading: false, data: result.meals });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ isLoading: false, error: error.message });
@@ -69,7 +69,7 @@ export async function GetMealById(id) {
     }
     const result = await response.json();
     // return result;
-    mealStore.setState({ isLoading: false, data: result });
+    mealStore.setState({ isLoading: false, data: result.meals });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ isLoading: false, error: error.message });
@@ -86,7 +86,7 @@ export async function GetAllCategories() {
     }
     const result = await response.json();
     // return result;
-    mealStore.setState({ isLoading: false, data: result });
+    mealStore.setState({ isLoading: false, data: result.categories });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ isLoading: false, error: error.message });
@@ -106,7 +106,7 @@ export async function GetMealsByIngredient(ingredient) {
     }
     const result = await response.json();
     // return result;
-    mealStore.setState({ isLoading: false, data: result });
+    mealStore.setState({ isLoading: false, data: result.meals });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ isLoading: false, error: error.message });
@@ -125,7 +125,7 @@ export async function GetMealsByCategory(category) {
     }
     const result = await response.json();
     // return result;
-    mealStore.setState({ isLoading: false, data: result });
+    mealStore.setState({ isLoading: false, data: result.meals });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ isLoading: false, error: error.message });
@@ -145,7 +145,7 @@ export async function GetMealsByArea(area) {
     }
     const result = await response.json();
     // return result;
-    mealStore.setState({ isLoading: false, data: result });
+    mealStore.setState({ isLoading: false, data: result.meals });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ isLoading: false, error: error.message });

@@ -5,6 +5,7 @@ export const apiState = {
   data: null,
   isLoading: false,
   error: null,
+  selectedElementId: null,
 };
 
 const createMealStore = (apiState) => {
