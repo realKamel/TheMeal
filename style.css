@@ -1,1 +1,133 @@
 @import url(./reboot.css);
+@font-face {
+  font-family: "Orenza";
+  src: url(./assets/fonts/OrenzaBoldRegular.otf);
+  font-display: swap;
+}
+
+aside {
+  z-index: 2;
+  padding: 0 5px;
+  box-shadow: 5px 0 5px #00000013;
+  background-color: rgb(253, 249, 242);
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  border: 1px solid var(--accent-color);
+}
+
+body {
+  background-color: rgb(247, 247, 247);
+}
+
+.font-family-main {
+  font-family: "Orenza";
+}
+.transition-all {
+  transition: color;
+  transition-duration: var(--duration);
+}
+aside div a {
+  font-family: "Orenza";
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+
+.text-underline {
+  /* justify-content: center; */
+  text-decoration: underline;
+}
+
+aside div a:hover {
+  color: var(--accent-color);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+#random-meal {
+  background-color: var(--accent-color);
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border-radius: var(--radius);
+  width: fit-content;
+  padding: 10px;
+  transition: all;
+  transition: var(--duration);
+}
+
+.hero-section {
+  position: relative;
+}
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url(./assets/images/backgroundImage-1024x1024.jpg);
+  background-position: center center;
+  background-size: cover;
+  /* backdrop-filter: blur(5px); */
+  filter: blur(10px);
+  z-index: -1;
+  opacity: 0.2;
+}
+
+#random-meal:hover {
+  background-color: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
+svg.lucide-dices {
+  transition: all;
+  transition-duration: var(--accent-color);
+  position: relative;
+}
+#random-meal:hover .lucide-dices {
+  color: var(--accent-color);
+  animation: shake 2s ease-in-out;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+    transform-origin: 50% 50%;
+  }
+
+  10% {
+    transform: rotate(8deg);
+  }
+
+  20%,
+  40%,
+  60% {
+    transform: rotate(-10deg);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: rotate(10deg);
+  }
+
+  80% {
+    transform: rotate(-8deg);
+  }
+
+  90% {
+    transform: rotate(8deg);
+  }
+}
+
+.hero-heading {
+  -webkit-text-stroke: 1px var(--accent-color);
+  /* border:1px solid ; */
+  color: white;
+  font-size: 4rem;
+  display: inline-block;
+}
