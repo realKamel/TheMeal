@@ -31,6 +31,9 @@ export function changeRoute(route) {
     selectedRoute = routes[route];
   }
 }
+export function getRoute() {
+  return selectedRoute;
+}
 
 export function RenderUI() {
   const html = /*html*/ `
