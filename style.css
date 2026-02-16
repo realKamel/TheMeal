@@ -4,7 +4,11 @@
   src: url(./assets/fonts/OrenzaBoldRegular.otf);
   font-display: swap;
 }
-
+@font-face {
+  font-family: "Roboto";
+  src: url(./assets/fonts/RobotoFlex.ttf);
+  font-display: swap;
+}
 aside {
   z-index: 2;
   padding: 0 5px;
@@ -22,9 +26,22 @@ body {
 .font-family-main {
   font-family: "Orenza";
 }
+.font-family-secondary {
+  font-family: "Roboto";
+}
 .transition-all {
   transition: color;
   transition-duration: var(--duration);
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  font-family: "Roboto";
 }
 aside div a {
   font-family: "Orenza";
@@ -130,4 +147,45 @@ svg.lucide-dices {
   color: white;
   font-size: 4rem;
   display: inline-block;
+}
+
+.mealComponents__figure {
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 16px;
+  margin: 4px;
+  font-family: "Inter" serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  color: #4b5563;
+
+  background-color: white;
+  border: 1px solid var(--accent-color);
+  border-radius: var(--radius);
+
+  transition: all 0.2s ease-in-out;
+}
+
+.tag:hover {
+  background-color: var(--accent-color);
+  color: white;
+  cursor: default;
+}
+
+.meal_tags div:nth-child(odd) {
+  background-color: rgb(255, 141, 100);
+  color: white;
+  /* border: 1px solid var(--accent-color); */
+}
+
+.border-round {
+  border-radius: var(--radius);
 }
