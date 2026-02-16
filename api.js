@@ -34,7 +34,7 @@ export async function searchByMealName(mealName) {
     }
 
     const result = await response.json();
-    mealStore.setState({ data: result.meals });
+    mealStore.setState({ data: result.meals, isLoading: false });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ error: error.message });
@@ -46,15 +46,16 @@ export async function searchByMealName(mealName) {
 //Random meal
 export async function GetRandomMeal() {
   try {
+    // mealStore.setState();
     mealStore.setState({ isLoading: true, error: null });
     const response = await fetch(`${apiUrl}random.php`);
 
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
 
     const result = await response.json();
-    mealStore.setState({ data: result.meals });
+    mealStore.setState({ data: result.meals, isLoading: false });
   } catch (error) {
-    console.error(error.message);
+    // console.error(error?.message);
     mealStore.setState({ error: error.message });
   } finally {
     mealStore.setState({ isLoading: false });
@@ -77,7 +78,7 @@ export async function GetMealById(id) {
     }
 
     const result = await response.json();
-    mealStore.setState({ data: result.meals });
+    mealStore.setState({ data: result.meals, isLoading: false });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ error: error.message });
@@ -98,7 +99,7 @@ export async function GetAllCategories() {
     }
 
     const result = await response.json();
-    mealStore.setState({ data: result.categories });
+    mealStore.setState({ data: result.categories, isLoading: false });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ error: error.message });
@@ -123,7 +124,7 @@ export async function GetMealsByIngredient(ingredient) {
     }
 
     const result = await response.json();
-    mealStore.setState({ data: result.meals });
+    mealStore.setState({ data: result.meals, isLoading: false });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ error: error.message });
@@ -147,7 +148,7 @@ export async function GetMealsByCategory(category) {
     }
 
     const result = await response.json();
-    mealStore.setState({ data: result.meals });
+    mealStore.setState({ data: result.meals, isLoading: false });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ error: error.message });
@@ -172,7 +173,7 @@ export async function GetMealsByArea(area) {
     }
 
     const result = await response.json();
-    mealStore.setState({ data: result.meals });
+    mealStore.setState({ data: result.meals, isLoading: false });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ error: error.message });
