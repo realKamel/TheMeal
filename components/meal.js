@@ -1,13 +1,13 @@
 "use strict";
 
+import { GetMealsByArea, GetMealsByCategory } from "../api.js";
+import { changeRoute } from "../main.js";
 import { mealStore } from "../meal.store.js";
 
 export function MealComponent() {
   const ingredientMeasure = [];
   const meanId = mealStore.getState().selectedElementId;
-  // if (!meanId) {
-  //   throw new Error("Mean Id is Expected");
-  // }
+
   if (mealStore.getState().isLoading) {
     return `<div class="loader">Loading...</div>`;
   }
@@ -16,6 +16,22 @@ export function MealComponent() {
   if (!data) {
     return `<div class="error">No meal details found.</div>`;
   }
+
+  document.addEventListener("click", (event) => {
+    console.log(event);
+    if (event.target && event.target.id == "catId") {
+      GetMealsByCategory(data.strCategory);
+      changeRoute("search");
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    console.log(event);
+    if (event.target && event.target.id == "areaId") {
+      GetMealsByArea(data.strArea);
+      changeRoute("search");
+    }
+  });
 
   for (let i = 1; i <= 20; i++) {
     const ingredient = data[`strIngredient${i}`];
@@ -53,7 +69,7 @@ export function MealComponent() {
                : "No Tags Is Provided"
            }
               <div class="d-flex flex-wrap">
-                <span class="tag gap-1">
+                <span id="catId" class="tag gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
                   fill="none" 
                   stroke="currentColor"
@@ -65,7 +81,7 @@ export function MealComponent() {
                 </svg>
                 Category: ${data.strCategory}
               </span>
-                <span class="tag gap-1">
+                <span id="areaId" class="tag gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                   class="lucide lucide-globe-icon lucide-globe"><circle cx="12" cy="12" r="10"/>
