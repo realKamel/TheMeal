@@ -19,7 +19,7 @@ const apiUrl = "https://www.themealdb.com/api/json/v1/1/";
 // URL's match the ingredient name with an underscore for any spaces.
 
 // Search meal by name
-export async function searchByMealName(mealName) {
+export async function GetByMealName(mealName) {
   if (!mealName) {
     throw new Error("the Meal Name isn't given");
   }
@@ -91,15 +91,16 @@ export async function GetMealById(id) {
 export async function GetAllCategories() {
   try {
     mealStore.setState({ isLoading: true });
-
-    const response = await fetch(`${apiUrl}categories.php`);
-
+    let response = await fetch(`${apiUrl}categories.php`);
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
     const result = await response.json();
-    mealStore.setState({ data: result.categories, isLoading: false });
+    mealStore.setState({
+      data: result.categories || result.meals,
+      isLoading: false,
+    });
   } catch (error) {
     console.error(error.message);
     mealStore.setState({ error: error.message });
