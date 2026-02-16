@@ -1,7 +1,7 @@
 "use strict";
 import { RenderUI } from "./main.js";
 
-export const apiState = {
+const apiState = {
   data: null,
   isLoading: false,
   error: null,
@@ -10,19 +10,18 @@ export const apiState = {
 
 const createMealStore = (apiState) => {
   let state = apiState;
-  // const listeners = new Set(); // set prevents duplicate
 
   return {
     getState: () => state,
     setState: (newState) => {
-      state = { ...state, ...newState };
-      RenderUI();
-      // listeners.forEach((listener) => listener(state));
+      const isDifferent = Object.keys(newState).some(
+        (key) => state[key] !== newState[key],
+      );
+      if (isDifferent) {
+        state = { ...state, ...newState };
+        RenderUI();
+      }
     },
-    // subscribe: (listener) => {
-    //   listeners.add(listener);
-    //   return () => listeners.delete(listener);
-    // },
   };
 };
 
