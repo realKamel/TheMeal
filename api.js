@@ -23,36 +23,41 @@ export async function searchByMealName(mealName) {
   if (!mealName) {
     throw new Error("the Meal Name isn't given");
   }
+
   try {
-    // mealStore.setState({ isLoading: true });
     mealStore.setState({ isLoading: true });
+
     const response = await fetch(`${apiUrl}search.php?s=${mealName}`);
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+
     const result = await response.json();
-    // return result;
-    mealStore.setState({ isLoading: false, data: result.meals });
+    mealStore.setState({ data: result.meals });
   } catch (error) {
     console.error(error.message);
-    mealStore.setState({ isLoading: false, error: error.message });
+    mealStore.setState({ error: error.message });
+  } finally {
+    mealStore.setState({ isLoading: false });
   }
 }
 
 //Random meal
 export async function GetRandomMeal() {
   try {
-    mealStore.setState({ isLoading: true });
+    mealStore.setState({ isLoading: true, error: null });
     const response = await fetch(`${apiUrl}random.php`);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
+
+    if (!response.ok) throw new Error(`Response status: ${response.status}`);
+
     const result = await response.json();
-    // return result;
-    mealStore.setState({ isLoading: false, data: result.meals });
+    mealStore.setState({ data: result.meals });
   } catch (error) {
     console.error(error.message);
-    mealStore.setState({ isLoading: false, error: error.message });
+    mealStore.setState({ error: error.message });
+  } finally {
+    mealStore.setState({ isLoading: false });
   }
 }
 
@@ -61,18 +66,23 @@ export async function GetMealById(id) {
   if (!id) {
     throw new Error("the Meal Id isn't given");
   }
+
   try {
     mealStore.setState({ isLoading: true });
+
     const response = await fetch(`${apiUrl}lookup.php?i=${id}`);
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+
     const result = await response.json();
-    // return result;
-    mealStore.setState({ isLoading: false, data: result.meals });
+    mealStore.setState({ data: result.meals });
   } catch (error) {
     console.error(error.message);
-    mealStore.setState({ isLoading: false, error: error.message });
+    mealStore.setState({ error: error.message });
+  } finally {
+    mealStore.setState({ isLoading: false });
   }
 }
 
@@ -80,16 +90,20 @@ export async function GetMealById(id) {
 export async function GetAllCategories() {
   try {
     mealStore.setState({ isLoading: true });
+
     const response = await fetch(`${apiUrl}categories.php`);
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+
     const result = await response.json();
-    // return result;
-    mealStore.setState({ isLoading: false, data: result.categories });
+    mealStore.setState({ data: result.categories });
   } catch (error) {
     console.error(error.message);
-    mealStore.setState({ isLoading: false, error: error.message });
+    mealStore.setState({ error: error.message });
+  } finally {
+    mealStore.setState({ isLoading: false });
   }
 }
 
@@ -98,18 +112,23 @@ export async function GetMealsByIngredient(ingredient) {
   if (!ingredient) {
     throw new Error("the Meal ingredient isn't given");
   }
+
   try {
     mealStore.setState({ isLoading: true });
-    const response = await fetch(`${apiUrl}$filter.php?i=${ingredient}`);
+
+    const response = await fetch(`${apiUrl}filter.php?i=${ingredient}`);
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+
     const result = await response.json();
-    // return result;
-    mealStore.setState({ isLoading: false, data: result.meals });
+    mealStore.setState({ data: result.meals });
   } catch (error) {
     console.error(error.message);
-    mealStore.setState({ isLoading: false, error: error.message });
+    mealStore.setState({ error: error.message });
+  } finally {
+    mealStore.setState({ isLoading: false });
   }
 }
 
@@ -117,18 +136,23 @@ export async function GetMealsByCategory(category) {
   if (!category) {
     throw new Error("the Meal Category isn't given");
   }
+
   try {
     mealStore.setState({ isLoading: true });
+
     const response = await fetch(`${apiUrl}filter.php?c=${category}`);
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+
     const result = await response.json();
-    // return result;
-    mealStore.setState({ isLoading: false, data: result.meals });
+    mealStore.setState({ data: result.meals });
   } catch (error) {
     console.error(error.message);
-    mealStore.setState({ isLoading: false, error: error.message });
+    mealStore.setState({ error: error.message });
+  } finally {
+    mealStore.setState({ isLoading: false });
   }
 }
 
@@ -137,17 +161,22 @@ export async function GetMealsByArea(area) {
   if (!area) {
     throw new Error("the Meal area isn't given");
   }
+
   try {
     mealStore.setState({ isLoading: true });
+
     const response = await fetch(`${apiUrl}filter.php?a=${area}`);
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+
     const result = await response.json();
-    // return result;
-    mealStore.setState({ isLoading: false, data: result.meals });
+    mealStore.setState({ data: result.meals });
   } catch (error) {
     console.error(error.message);
-    mealStore.setState({ isLoading: false, error: error.message });
+    mealStore.setState({ error: error.message });
+  } finally {
+    mealStore.setState({ isLoading: false });
   }
 }
