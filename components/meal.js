@@ -1,20 +1,28 @@
 "use strict";
 
 import { mealStore } from "../meal.store.js";
-const ingredientMeasure = [];
 
 export function MealComponent() {
+  const ingredientMeasure = [];
   const meanId = mealStore.getState().selectedElementId;
   // if (!meanId) {
   //   throw new Error("Mean Id is Expected");
   // }
-  const data = mealStore.getState().data;
+  if (mealStore.getState().isLoading) {
+    return `<div class="loader">Loading...</div>`;
+  }
+
+  const data = mealStore.getState().data ? mealStore.getState().data[0] : null;
+  if (!data) {
+    return `<div class="error">No meal details found.</div>`;
+  }
+
   for (let i = 1; i <= 20; i++) {
     const ingredient = data[`strIngredient${i}`];
     const measure = data[`strMeasure${i}`];
     ingredientMeasure.push({ ingredient, measure });
   }
-  console.log(data);
+  // console.log(data);
   // console.log(ingredientMeasureMap);
 
   let ingredientMeasureHtml = ``;
@@ -34,13 +42,16 @@ export function MealComponent() {
         <div class="row">
           <div class="col-4 p-4">
             <img class="mealComponents__figure" src="${data.strMealThumb}" alt="${data.strMealAlternate}">
-            <span>Tags: </span>
-            ${data.strTags
-              .split(",")
-              .map((t) => {
-                return `<span class="tag">${t}</span>`;
-              })
-              .join("")}
+           ${
+             data.strTags
+               ? `
+                <span>Tags: </span>
+              ${data.strTags
+                .split(",")
+                .map((t) => `<span class="tag">${t.trim()}</span>`)
+                .join("")}`
+               : "No Tags Is Provided"
+           }
               <div class="d-flex flex-wrap">
                 <span class="tag gap-1">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
