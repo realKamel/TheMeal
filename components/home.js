@@ -8,7 +8,6 @@ export function HomeComponent() {
     if (event.target && event.target.id === "random-meal") {
       console.log("Button clicked");
       GetRandomMeal();
-      // selectedRoute = routes["meal"];
       changeRoute("meal");
     }
   });
